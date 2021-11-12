@@ -2,51 +2,40 @@ import java.awt.*;
 
 public class Saab95 extends Car{
 
-    public boolean turboOn;
-    public int nrDoors; // Number of doors on the car
-    public double enginePower; // Engine power of the car
-    public double currentSpeed; // The current speed of the car
-    public Color color; // Color of the car
-    public String modelName; // The car model name
-    
+    private boolean turboOn; // Boolean to controll turbo in
+
+    /**
+     * Constructor of Saab95
+     * Inherits Car.
+     */
     public Saab95(){
-        nrDoors = 2;
-        color = Color.red;
-        enginePower = 125;
+        super(2, 125, Color.black, "Saab95");
 	    turboOn = false;
-        modelName = "Saab95";
-        stopEngine();
     }
 
+    /**
+     * Method to activate turbo
+     */
     public void setTurboOn(){
 	    turboOn = true;
     }
-
+    /**
+     * Method to deactivate turbo
+     */
     public void setTurboOff(){
 	    turboOn = false;
     }
-    
-    public double speedFactor(){
+
+    /**
+     * Method to determine speed factor
+     * @return speed factor. Speed factor is dependent whether the turbo is on or not.
+     * Overrides the equivalent method in Car.
+     */
+    @Override
+    protected double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
     }
 
-    public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-    public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
-    
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
-    }
-
-    // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
-    }
 }
